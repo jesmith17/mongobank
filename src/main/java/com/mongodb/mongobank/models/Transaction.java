@@ -9,25 +9,24 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
-
 public class Transaction {
 
     private String txnId;
-    private Integer accountNumber;
+    private String accountNumber;
     private TransactionType type;
+    @Field(targetType = DECIMAL128)
     private BigDecimal amount;
     private Timestamp transactionDate = new Timestamp(System.currentTimeMillis());
     private String authCode;
     private String description;
     private String merchantId;
 
-    private Account account;
 
-    public Integer getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Integer accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

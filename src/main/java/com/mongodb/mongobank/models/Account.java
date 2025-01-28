@@ -1,10 +1,17 @@
 package com.mongodb.mongobank.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
 
 @JsonTypeInfo(
@@ -17,20 +24,19 @@ import java.util.List;
 })
 public abstract class Account {
 
+    @Id
     protected String id;
 
     private String accountName;
 
     protected boolean overDraft = false;
 
+    @Field(targetType = DECIMAL128)
     protected BigDecimal balance;
 
     private Customer customer;
 
-    private List<Transaction> recentTransactions;
-
     public abstract Account applyTransaction(Transaction transaction);
-
 
     public boolean isOverDraft() {
         return overDraft;
@@ -46,14 +52,6 @@ public abstract class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
-    }
-
-    public List<Transaction> getRecentTransactions() {
-        return recentTransactions;
-    }
-
-    public void setRecentTransactions(List<Transaction> recentTransactions) {
-        this.recentTransactions = recentTransactions;
     }
 
     public Customer getCustomer() {

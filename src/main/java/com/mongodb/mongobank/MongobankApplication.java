@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.lang.NonNull;
@@ -22,46 +24,42 @@ public class MongobankApplication {
         SpringApplication.run(MongobankApplication.class, args);
     }
 
-    @Bean
-    public MongoCustomConversions mongoCustomConversions() {
-        return new MongoCustomConversions(Arrays.asList(
+        @Bean
+        public MongoCustomConversions mongoCustomConversions() {
+            return new MongoCustomConversions(Arrays.asList(
+                new Converter<BigDecimal, Decimal128>() {
+                    @Override
+                    public Decimal128 convert(@NonNull BigDecimal source) {
+                        return new Decimal128(source);
+                    }
+                },
 
-            new Converter<BigDecimal, Decimal128>() {
+                new Converter<Decimal128, BigDecimal>() {
+                    @Override
+                    public BigDecimal convert(@NonNull Decimal128 source) {
+                        return source.bigDecimalValue();
+                    }
+                },
 
-                @Override
-                public Decimal128 convert(@NonNull BigDecimal source) {
-                    return new Decimal128(source);
+                new Converter<Date, Timestamp>() {
+                    @Override
+                    public Timestamp convert(@NonNull Date source) {
+                        return new Timestamp(source.getTime());
+                    }
+                },
+                new Converter<Timestamp, Date>() {
+                    @Override
+                    public Date convert(@NonNull Timestamp source) {
+                        return new Date(source.getTime());
+                    }
                 }
-            },
+            ));
+        }
 
-            new Converter<Decimal128, BigDecimal>() {
-
-                @Override
-                public BigDecimal convert(@NonNull Decimal128 source) {
-                    return source.bigDecimalValue();
-                }
-
-            },
-
-            new Converter<Date, Timestamp>() {
-
-                @Override
-                public Timestamp convert(@NonNull Date source) {
-                    return new Timestamp(source.getTime());
-                }
-
-            },
-            new Converter<Timestamp, Date>() {
-
-                @Override
-                public Date convert(@NonNull Timestamp source) {
-                    return new Date(source.getTime());
-                }
-
-            }
+        @Bean
+        MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
+            return new MongoTransactionManager(dbFactory);
+        }
 
 
-        ));
-
-    }
 }

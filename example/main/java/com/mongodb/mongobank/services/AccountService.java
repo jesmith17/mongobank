@@ -22,17 +22,14 @@ public class AccountService {
 
     public Account createAccount(Account account, String customerId) {
 
-        Customer mdbCustomer = customerRepository.getCustomerById(customerId);
-        account.setCustomer(mdbCustomer);
-        mdbCustomer.getAccounts().add(account);
+        Customer customer = customerRepository.getCustomerById(customerId);
+        account.setCustomer(customer);
         accountRepository.save(account);
-        customerRepository.save(mdbCustomer);
         return  account;
     }
 
     public List<Account> getAccountsByCustomer(String customerId){
-        Customer mdbCustomer = customerRepository.getCustomerById(customerId);
-        return mdbCustomer.getAccounts();
+        return null;
 
     }
 

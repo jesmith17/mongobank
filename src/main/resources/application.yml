@@ -6,6 +6,15 @@ spring:
   application:
     name: MongoBank
 
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core: INFO
+      mongodb:
+        driver: DEBUG
 
 
 

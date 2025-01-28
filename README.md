@@ -74,6 +74,6 @@ Hello World
 
 At this point the system is up and working, and you are ready to start your hands-on lab. Enjoy the process and we hope you learn about the benefits and ease of working with MongoDB and Java. 
 
-[Hands-On Lab Instructions](./LAB.md)
+[Hands-On Lab Instructions](./LAB1.md)
 
 

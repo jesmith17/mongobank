@@ -8,6 +8,9 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.lang.NonNull;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
+
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -64,4 +67,9 @@ public class MongobankApplication {
         ));
 
     }
+//        @Bean
+//        MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
+//            return new MongoTransactionManager(dbFactory);
+//        }
+
 }
