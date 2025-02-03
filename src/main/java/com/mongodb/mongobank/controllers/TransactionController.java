@@ -20,7 +20,7 @@ public class TransactionController {
 
     @GetMapping("{id}")
     public Transaction getTransaction(@PathVariable String id) {
-        return this.transactionService.getTransctionById(id);
+        return this.transactionService.getTransactionById(id);
     }
 
 
