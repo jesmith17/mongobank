@@ -13,15 +13,11 @@ import java.util.HashMap;
 
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 
-    @Query(value="?0", sort = "{'firstName': -1, 'lastName': 1, 'address.city':  1}")
-    Page<Customer> searchCustomers(HashMap<String, Object> params, Pageable paging);
-
 
     Customer getCustomerById(String id);
 
     Customer getCustomerByAccountsId(String accountNumber);
 
-    Page<Customer> getCustomerByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
 
 
 

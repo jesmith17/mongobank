@@ -49,15 +49,17 @@ Ensure that both the `Customer` object and the `Account` object end up with corr
 
 
 
-#### Note about `@DocumentReference`
+> [!NOTE]
+> `@DocumentReference`
+> Spring-data provides 2 ways to enable relationships between MongoDB collections.
+> * `@DBRef`
+> * `@DocumentReference`
+> 
+> `@DBRef` uses a custom object type to store the linkage information. This format is harder to use in other operations (like aggregations).  `@DocumentReference` simply uses and ObjectId (or array of them depending on the relatinoship) which does not block other uses. That's why we are using it here.
+>
+> `@JsonBackReference` is needed to ensure that we don't get a infinite loop of Spring trying to resolve the Transaction -> Account -> Transaction -> Account loop.
 
-Spring-data provides 2 ways to enable relationships between MongoDB collections. 
-* `@DBRef`
-* `@DocumentReference`
 
-`@DBRef` uses a custom object type to store the linkage information. This format is harder to use in other operations (like aggregations).  `@DocumentReference` simply uses and ObjectId (or array of them depending on the relatinoship) which does not block other uses. That's why we are using it here. 
-
-`@JsonBackReference` is needed to ensure that we don't get a infinite loop of Spring trying to resolve the Transaction -> Account -> Transaction -> Account loop. 
 
 
 

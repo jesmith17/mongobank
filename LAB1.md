@@ -82,14 +82,14 @@ curl --header "Content-Type: application/json" --request POST --data <example da
 
 Response should come back and show you are customer record with the ID field populated. 
 
-** Note: You can also use the example payloads in tools like Postman if you prefer
+> [!TIP]
+> You can also use the example payloads in tools like Postman if you prefer
 
 
 #### Updating a customer
 
 Execute the above REST call but change some of the data attributes and observe the behavior of the customer record. 
 
-### ? What could be done to prevent the update from happening ? ### 
 
 
 
@@ -154,6 +154,12 @@ Add appropriate info the customer payload and re-run the save operation.
 Validate that the saved customer now has a collection of phone objects  (should be similar to the Email collection already persisted)
 
 
+> [!TIP]
+> 
+> MongoDB Data Modeling patterns use a Schema Versioning pattern when making structure changes
+> See [Maintain Different Schema Versions](https://www.mongodb.com/docs/manual/data-modeling/design-patterns/data-versioning/schema-versioning/)
+> and [Building with Patterns: The Schema Versioning Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-schema-versioning-pattern) for details
+> 
 
 
 

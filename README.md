@@ -49,7 +49,7 @@ Lets build the application to see that it run successfully.
 mvn spring-boot:run 
 ```
 or 
-``` 
+``` shell 
 ./gradlew bootRun
 ```
 Depending on the build tool you prefer to use. 
@@ -59,9 +59,7 @@ Depending on the build tool you prefer to use.
 The base system provides REST API endpoints, so lets verify that those are working and returning content. 
 
 ```shell
-
 curl locahost:8080/api/hello -H "Content-Type:application/json"
-
 ```
 
 The response should look like 
@@ -74,6 +72,8 @@ Hello World
 
 At this point the system is up and working, and you are ready to start your hands-on lab. Enjoy the process and we hope you learn about the benefits and ease of working with MongoDB and Java. 
 
-[Hands-On Lab Instructions](./LAB1.md)
+* [Lab 1: Persistence and Query](./LAB1.md)
+* [Lab 2: Relationships and Transactions ](./LAB2.md)
+* [lab 3: Advanced Topics](./LAB3.md)
 
 

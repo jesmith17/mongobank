@@ -14,15 +14,7 @@ import java.util.List;
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "accountType")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = CreditAccount.class, name = "CREDIT"),
-        @JsonSubTypes.Type(value = SavingsAccount.class, name = "SAVINGS")
-})
-public abstract class Account {
+public class Account {
 
     @Id
     protected String id;
@@ -36,7 +28,6 @@ public abstract class Account {
 
     private Customer customer;
 
-    public abstract Account applyTransaction(Transaction transaction);
 
     public boolean isOverDraft() {
         return overDraft;
@@ -78,17 +69,6 @@ public abstract class Account {
         this.accountName = accountName;
     }
 
-    public abstract AccountType getAccountType();
-
-
-    enum AccountType {
-        SAVINGS,
-        CHECKING,
-        CREDIT,
-        MONEY_MARKET,
-        BUSINESS,
-        INVESTMENT
-    }
 
 
 

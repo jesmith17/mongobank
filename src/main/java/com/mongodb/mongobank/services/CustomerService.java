@@ -35,16 +35,6 @@ public class CustomerService {
     }
 
     public Page<Customer> searchCustomers(Customer customer, int page){
-//        Pageable paging = PageRequest.of(page, 100);
-//        return customerRepository.getCustomersByFirstNameLastName(customer.getFirstName(), customer.getLastName(), paging);
-
-
-// ...
-
-        List<Customer> result = mongoTemplate.query(Customer.class)
-                .matching(query(where("firstName").is(customer.getFirstName()).and("lastName").is(customer.getLastName())))
-                .all();
-
         return null;
     }
 
