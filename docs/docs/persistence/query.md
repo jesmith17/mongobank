@@ -1,6 +1,14 @@
 # Find a Customer
 
-#### 2.1  Search by ID
+Now that you can successfully save a record to the DB, lets work on creating ways to retrieve records. Eventually we will want to query customers by 
+
+* Primary Key (`_id`)
+* Customer Name
+* Combination of fields
+* Paged results
+
+
+## Search by Id
 
 Locate the `getCustomerById()` method in the customer service class and lets make the necessary code changes to do our search.
 
@@ -13,7 +21,7 @@ public Customer getCustomerById(String id) {
 
 This leverages the default methods provided by the repository pattern to do the ID lookup.
 
-#### 2.2 Search by other fields
+## Search by multiple fields
 
 Select at least 2 fields of the customer object to search by and implement the appropriate code to execute your search.
 
@@ -42,4 +50,6 @@ List<Customer> result = mongoTemplate.query(Customer.class)
 @Query(value="{'firstName': ?0, 'lastName': ?1}")
     List<Customer> searchCustomers(String firstName, String lastName);
 ```
+
+
 

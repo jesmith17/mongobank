@@ -1,4 +1,8 @@
-# Persist a Customer
+# Saving Objects
+
+Focus of this section will be on learing how to save a Java object to MongoDB. 
+
+## Update Customer Object
 
 Using your editor of choice, open the `Customer.java` file located in `src/main/com/mongodb/mongobank/models`
 
@@ -22,6 +26,9 @@ public class Customer {
 
 `@Id` identifies the field that we want spring-data to map our `_id` field to in MongoDB (required field in each document, serves as the primary key)
 
+
+## Create Customer Repository
+
 Create a new package for the repository classes. And inside create a new `CustomerRepository` class with the signature found below.
 
 ```java 
@@ -35,6 +42,8 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
 }
 ```
 
+## Update service class
+
 Finally Update the `CustomerService` class
 
 ``` java
@@ -46,6 +55,8 @@ CustomerRepository customerRepository
     }
 ```
 
+## Testing
+
 
 There are example JSON data sets for the objects in the data folder in the project. Use those for examples of the data payloads.
 
@@ -55,13 +66,22 @@ curl --header "Content-Type: application/json" --request POST --data <example da
   
 ```
 
+
+
 Response should come back and show you are customer record with the ID field populated.
 
-> [!TIP]
-> You can also use the example payloads in tools like Postman if you prefer
+:::tip
+You can also use the example payloads in tools like Postman if you prefer
+:::
 
 
 #### Updating a customer
 
 Execute the above REST call but change some of the data attributes and observe the behavior of the customer record. 
 
+## Complete for Remaining Classes
+
+Using the pattern above, complete the changes needed for the following objects
+
+* Account
+* Transaction
