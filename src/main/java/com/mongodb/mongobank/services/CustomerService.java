@@ -23,9 +23,6 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    @Autowired
-    MongoTemplate mongoTemplate;
-
     public Customer createCustomer(Customer customer) {
         return null;
     }

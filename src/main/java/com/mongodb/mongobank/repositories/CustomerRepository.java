@@ -14,11 +14,4 @@ import java.util.HashMap;
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 
 
-    Customer getCustomerById(String id);
-
-    Customer getCustomerByAccountsId(String accountNumber);
-
-
-
-
 }
