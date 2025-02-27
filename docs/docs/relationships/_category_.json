@@ -1,0 +1,8 @@
+{
+  "label": "Relationships",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Handling relationships between separate objects in MongoDB"
+  }
+}
