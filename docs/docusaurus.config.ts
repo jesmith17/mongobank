@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'MongoBank',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'The best place for your money',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -65,7 +65,6 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
