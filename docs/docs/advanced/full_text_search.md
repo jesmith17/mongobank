@@ -2,16 +2,6 @@
 
 Cover additional advanced topics for individuals who want to address more complex scenarios. 
 
-## Table of Contents
-
-1. [**Polymorphic** ](#1--persist-a-customer--update)
-2. [**Full Text Search** ](#2-retrieve-customer)
-
-
-
-
-
-
 
 ## Full Text Search
 
