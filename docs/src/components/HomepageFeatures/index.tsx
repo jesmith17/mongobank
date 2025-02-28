@@ -11,12 +11,11 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Java + Spring',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Based on one of the most common enterprise patterns in use today with Spring-Boot and Spring-Data
       </>
     ),
   },
@@ -25,18 +24,16 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Focus on building the logic against the DB, and not the plumbing which is already done.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Powered by MongoDB',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Enjoy the benefits of working with MongoDB, the most developer friendly database available.
       </>
     ),
   },
