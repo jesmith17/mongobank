@@ -25,9 +25,9 @@ public class CustomerSearchHelper {
                 HashMap<String, Object> addrParams = new HashMap<>();
                 HashMap<String, Object> subParams = new HashMap<>();
                 subParams.put("city", address.getCity());
-                subParams.put("address.state", address.getState());
-                subParams.put("address.street", address.getStreet());
-                subParams.put("address.zip", address.getZip());
+                subParams.put("state", address.getState());
+                subParams.put("street", address.getStreet());
+                subParams.put("zip", address.getZip());
                 subParams.values().removeIf(entry -> entry == null || entry.toString().isEmpty());
                 addrParams.put("$elemMatch", subParams);
                 HashMap<String, Object> finalParams = new HashMap<>();

@@ -10,8 +10,10 @@ import java.util.List;
 
 import java.util.Date;
 
+@Document("customers")
 public class Customer {
 
+    @Id
     private String id;
     private String title;
     private String firstName;
@@ -20,8 +22,6 @@ public class Customer {
     private Date createdDate;
     private String email;
     private Integer creditScore;
-    private String pronoun;
-    private String genderIdentity;
 
     List<Address> addresses;
 
@@ -79,22 +79,6 @@ public class Customer {
 
     public void setCreditScore(Integer creditScore) {
         this.creditScore = creditScore;
-    }
-
-    public String getPronoun() {
-        return pronoun;
-    }
-
-    public void setPronoun(String pronoun) {
-        this.pronoun = pronoun;
-    }
-
-    public String getGenderIdentity() {
-        return genderIdentity;
-    }
-
-    public void setGenderIdentity(String genderIdentity) {
-        this.genderIdentity = genderIdentity;
     }
 
     public List<Address> getAddresses() {

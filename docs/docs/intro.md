@@ -37,13 +37,38 @@ Create a file named `.env` in the root of your project. Inside that file add the
 MONGODB_URI= <your connection string here>
 
 ```
+### Setting up MongoDB
+
+There are several options for Installing MongoDB. 
+
+#### Homebrew
+```shell 
+  brew install mongodb-community  
+```
+#### Community on Windows
+
+To install MongoDB Community on Windows follow these instructions [MongoDB Community on Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+
+#### Docker
+For details on how to run MongoDB in docker, see this link.  [MongoDB Community with Docker](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/)
+
+
+#### Atlas
+You can also use a Free tier instances from MongoDB Atlas. To get started see [MongoDB Atlas Free Tier](https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core-high-int_retarget-brand_gic-null_amers-us_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=22194044121&adgroup=174717502979&cq_cmp=22194044121&gad_source=1&gclid=CjwKCAjwp8--BhBREiwAj7og15pdOvpj47L39jjkQe6-2qRBApmMpA4co4XbVUvmu5BaGUYEzhUWURoCegMQAvD_BwE)
+
+:::tip
+
+To complete the advanced topics you will need to use MongoDB Atlas. You can run Atlas via docker with the instructions found here
+[Atlas in Docker](https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-docker/)
+:::
+
 
 Your connection string is going to be similar to
-` mongodb://localhost:27017 `. The specific port that shows will depend on the port mapptings you provided the Atlas docker container when you started it.
+` mongodb://localhost:27017 `. The specific port that shows will depend on the port mapptings you provided the Atlas docker container when you started it. 
 
-3. Build the application
+## Build the application
 
-Lets build the application to see that it run successfully.
+Lets build the application to see that it runs successfully.
 
 ```shell
 mvn spring-boot:run 
@@ -67,5 +92,7 @@ The response should look like
 ```
 Hello World
 ```
+
+If you get to this point you have everything ready to start the lab. Click on the link below for "Saving Objects" to start. 
 
 
