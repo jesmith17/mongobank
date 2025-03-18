@@ -56,10 +56,10 @@ public class MongobankApplication {
             ));
         }
 
-        @Bean
-        MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
-            return new MongoTransactionManager(dbFactory);
-        }
+//        @Bean
+//        MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
+//            return new MongoTransactionManager(dbFactory);
+//        }
 
 
 }

@@ -1,12 +1,14 @@
 # Saving Objects
 
-Focus of this section will be on learing how to save a Java object to MongoDB. 
+Focus of this section will be on learning how to save a Java object to MongoDB using the Repository pattern in Spring. Multiple approaches exist
+for persistence in Spring-Data, but the repository pattern offers some unique advantages, and is typically familiar to Spring-data users due to is wide adoption in JPA. 
+We will cover how to use the pattern with MongoDB, and where some of the other options have challenges or benefits. 
 
 ## Update Customer Object
 
 Using your editor of choice, open the `Customer.java` file located in `src/main/com/mongodb/mongobank/models`
 
-Update your `Customers` class to match the following. (some content omitted to breivity)
+Update your `Customers` class to match the following. (some content omitted to brevity)
 
 ```java
 import org.springframework.data.annotation.Id;
@@ -22,9 +24,15 @@ public class Customer {
 }
 ```
 
-`@Document()` tells spring-data that we want to treat this object as a document and with the collection mame of "customers"
+`@Document()` tells spring-data that we want to treat this object as a document and with the collection mame of "customers". 
+
 
 `@Id` identifies the field that we want spring-data to map our `_id` field to in MongoDB (required field in each document, serves as the primary key)
+
+:::tip
+The collection name attribute is optional, but used here to make sure the collection name is plural, which tends to align with most organization naming standards.
+
+:::
 
 
 ## Create Customer Repository
@@ -66,7 +74,27 @@ curl --header "Content-Type: application/json" --request POST --data <example da
   
 ```
 
+<details>
+  <summary>Example Payloads</summary>
+    
+    Here is an example payload for testing the customer service. 
 
+```json 
+{
+    "firstName":"Andy",
+    "lastName":"Reid",
+    "title":"Coach",
+    "addresses": [{
+        "city":"Kansas City",
+        "street": "1 Arrowhead Way",
+        "state":"MO",
+        "country":"US",
+        "zip":"64129"
+    }]
+}
+
+```
+</details>
 
 Response should come back and show you are customer record with the ID field populated.
 

@@ -1,6 +1,7 @@
 
 # Record a Transaction
 
+Lets record a banking transaction against our bank account. Start with the `TransactionService` class that we haven't used to this point. 
 
 Using the method signature defined in the `recordTransaction` method, implement the additional logic to recording a banking transaction.
 
@@ -17,6 +18,7 @@ Key things to implement.
 * Define if the account has a negative balance and updated the `overDraft` attribute accordingly.
 
 
+### Relationship to Account
 
 ```java
     @Document("transactions")
@@ -36,6 +38,9 @@ Key things to implement.
         }
 ```
 
+### Business Logic
+
+
 `TrasactionSevice` Example
 
 ```java
@@ -50,15 +55,27 @@ Key things to implement.
     }
 ```
 
-#### Useage of `Save()`
+:::warning
 
-Example above uses the `insert()` method insted of `save()`. The `insert()` method maps to the `insertOne` or `insertMany` calls in MongoDB where `save()` is a spring method can be either insert or udpate.
+The above code is not concurrency safe, and could result in invalid account balance entries
 
-It would not be appropriate for an update to an existing transction, so `insert()` is the appopriate method here.
+- Why? 
+- How can you fix it? 
 
-The other imapct of `save()` is that it will attempt to udpate every field of the document. This can be slower performing and not idempotent, which can be critical in a banking type app.
+:::
+
+
+
+### Update Operators
+
+Example above uses the `insert()` method insted of `save()` when inserting the `txn` record. The `insert()` method maps to the `insertOne` or `insertMany` calls in MongoDB where `save()` is a spring method can be either insert or udpate.
+
+It would not be appropriate for an update to an existing transaction, so `insert()` is the appropriate method here.
+
+The other impact of `save()` is that it will attempt to update every field of the document. This can be slower performing and not idempotent, which can be critical in a banking type app.
 
 `$inc` is one operator that MongoDB offers that can be used to increment a specific field in the document. It updates only the single field, and can be more performant.   One way to do this is to combine the `@Query` and `@Update` annotations in the repository.
+
 
 
 ```java
@@ -68,4 +85,24 @@ The other imapct of `save()` is that it will attempt to udpate every field of th
     long updateAccountBalance(String accountId, BigDecimal amount, boolean overLimit);
 
 ```
-This approach allows you to just update the specific fields that you want,  instead of the entire document. It also doesn't require that the document be read into memory first in order to be updated.  Notice that this method does not return an object, but instead a `Long` representing the number of successfully updated records. 
+This approach allows you to just update the specific fields that you want,  instead of the entire document. It also doesn't require that the document be read into memory first in order to be updated.  Notice that this method does not return an object, but instead a `Long` representing the number of successfully updated records.
+
+:::note
+
+
+        You can also use the `inc` method with the `MongoTemplate` pattern
+
+```java
+UpdateResult result = mongoTemplate.update(Account.class)
+                .matching(where("_id").is(txn.getAccountNumber()))
+                .apply(new Update().inc("accounts.$.balance", 50.00))
+                .all();
+
+
+```
+[Spring Data MongoDB Updating Documents](https://docs.spring.io/spring-data/mongodb/reference/mongodb/template-crud-operations.html#mongodb-template-update.update)
+:::
+
+:::tip
+
+The full list of MongoDB Update operators can be found [MongoDB Update Operators](https://www.mongodb.com/docs/manual/reference/operator/update/)
