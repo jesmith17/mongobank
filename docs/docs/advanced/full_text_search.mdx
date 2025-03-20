@@ -1,0 +1,78 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+# Advanced Topics
+
+Cover additional advanced topics for individuals who want to address more complex scenarios. 
+
+
+## Full Text Search
+
+Add in support for full text search using Atlas Search to gain ability to search text blocks for content. 
+
+Using the `Customer` model, add in support for fuzzy matching on customer name.
+
+Create the following method in your `CustomerRepository` class
+
+```java
+
+List<Customer> searchCustomersByName(String searchText);
+
+```
+
+Leveraging the `@Aggregation` method we will implement an Atlas Search query against the data. Directly above the new method add this
+
+```java
+
+@Aggregation(pipeline= {"{'$search': {index:'customer_search', text:{ query:?0, fuzzy:{},path:['lastName','firstName','address.city','address.state','address.zip','phones.number','emails.email']}}}"})
+
+```
+
+### Create Search Index
+
+
+<Tabs>
+    <TabItem value="shell" label="Shell">
+
+    At the terminal run the following command
+
+    ```shell
+
+    mongosh "mongodb://localhost:27017/?directConnection=true"
+    ```
+
+    Once inside the mongosh run the following to create the index
+
+    ```shell
+    use bank;
+
+    db.customers.createSearchIndex("customer_search", {mappings: {dynamic: true}})
+    ```
+
+    This creates an Atlas Search index using the dynamic mappings, which indexes all of the fields in the document.
+
+    :::tip
+    You can also access a MongoDB shell environment from Compass. Select the button in the top right corner that says "Open MongoDB Shell"
+    :::
+    </TabItem>
+    <TabItem value="atlas" label="Atlas">
+        You can also create search indexes via the Atlas Web Console.
+
+        Navigate to the specific cluster you want to create the index in and look for the tab labeled `Atlas Search`. Follow the instructions to create a dynamic index with the name `customer_search` against all
+        fields in the document
+
+    </TabItem>
+</Tabs>
+
+Update additional controller and service code as needed to use the new search component. 
+
+:::tip
+ Have the controller accept a single string input that would be similar to a Google Search type interface.
+ You can then ask Atlas Search to compare that input string against an array of fields in your document, giving you a high level of search flexibility.
+:::
+
+
+
+
+
