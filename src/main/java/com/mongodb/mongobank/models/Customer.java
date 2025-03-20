@@ -10,10 +10,9 @@ import java.util.List;
 
 import java.util.Date;
 
-@Document("customers")
+
 public class Customer {
 
-    @Id
     private String id;
     private String title;
     private String firstName;

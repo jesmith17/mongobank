@@ -54,8 +54,23 @@ Lastly add logic to the account class to allow Spring to know which type to inst
 public abstract class Account {
 ```
 
-> [!NOTE]
->  Adding additional properties to the individual class types will automatically ask MongoDB to persist them to the DB.
+Spring-Data will automatically add an attribute to each class specifying what concrete implementation is should be serialized back into. 
+
+```json
+
+{
+  ...,
+  _class: "com.mongodb.mongobank.models.SavingsAccount"
+}
+
+```
+
+
+
+
+:::note
+  Adding additional properties to the individual class types will automatically ask MongoDB to persist them to the DB.
+:::
 
 This enables you to be able to persist account types in the same collection. Some of the benefits include
 
@@ -63,6 +78,7 @@ This enables you to be able to persist account types in the same collection. Som
 * Ability to do aggregations and operations across all account types
 * Simplified indexes and reduce index overhead
 
-> [!TIP]
-> MongoDB supports Partial indexes that can be applied only to object matching certain criteria. Use this to create indexes just for `CreditAccount` specific fields
-> Allows reduced index size without need to break data into it's own collection. 
+:::tip
+ MongoDB supports [Partial indexes](https://www.mongodb.com/docs/manual/core/index-partial/) that can be applied only to object matching certain criteria. Use this to create indexes just for `CreditAccount` specific fields
+ Allows reduced index size without need to break data into it's own collection. 
+:::
